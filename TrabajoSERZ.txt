@@ -1,0 +1,94 @@
+package model;
+
+public class Biblioteca {
+    // Definición de atributos
+    public String cod_libro;
+    public int ubicacion;
+    private int nro_paginaas;
+    public  String nombres;
+    private String formato;
+    public boolean activo;
+    
+    // para leer datos "getters"
+    public String getCod_libro() {
+        return cod_libro;
+    }
+
+    public int getUbicacion() {
+        return ubicacion;
+    }
+
+    public int getNro_paginaas() {
+        return nro_paginaas;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+    
+     // para guardar "setters"
+    public void setCod_libro(String cod_libro) {
+        this.cod_libro = cod_libro;
+    }
+
+    public void setUbicacion(int ubicacion) {    
+        this.ubicacion = ubicacion;
+    }
+
+    public void setNro_paginaas(int nro_paginaas) {
+        this.nro_paginaas = nro_paginaas;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
+
+    // para guardar "setters"
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }    
+
+}
+
+
+=====================
+=====================
+
+package controller;
+import model.Biblioteca; // Se usará la clase Alumno del paquete model
+
+public class TestBiblioteca {
+    public static void main(String[] args) {
+        /* 
+            Uso o llamada a la clase Alumno
+        */
+        Biblioteca ba1; // Declaración del objeto a1
+                   // Alumno es la clase o tipo de dato
+                   // a1 es el objeto o instancia de la clase Alumno
+        ba1 = new Biblioteca();  // Inicialización del objeto (listo a usarse)
+        
+        // Llenado de datos
+        ba1.cod_libro = "123456";  // Se pone la característica "Ana María" al atributo nombres
+        ba1.ubicacion = 987; 
+        // a1.DNI = "12345678"; // No se puede usar porque tiene acceso privado
+        
+        
+        // Uso y muestra los datos
+        System.out.println("cod libro        : " + ba1.cod_libro);
+        System.out.println("Ubicacion       : " + ba1.ubicacion);
+        
+    }
+    
+}
