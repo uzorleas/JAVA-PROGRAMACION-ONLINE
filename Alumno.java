@@ -1,52 +1,71 @@
 package model;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
-/**
- *
- * @author Libia
- */
-public class Alumno {
-    private int cod_alum;
-    private String nombres;
-    private int año_ingreso;
-    
-    public Alumno(){}
+public class Alumno extends Persona {
+    private Fecha fec_registro;
+    private boolean alumno_vigente;
+    private String telefono;
 
-    public Alumno(int cod_alum, String nombres, int año_ingreso) {
-        this.cod_alum = cod_alum;
-        this.nombres = nombres;
-        this.año_ingreso = año_ingreso;
+    // Constructor con Persona, teléfono y fecha de registro
+    public Alumno(Persona persona, String telefono, Fecha fec_registro) {
+        super(persona.getDNI(), persona.getNombres(), persona.getFec_nac(), persona.getEmail());
+        this.fec_registro = fec_registro;
+        this.alumno_vigente = true; // Valor inicial por defecto
+        this.telefono = telefono;
     }
 
-    public int getCod_alum() {
-        return cod_alum;
+    // Constructor con Persona (se asume fecha de registro actual y sin teléfono)
+    public Alumno(Persona persona) {
+        super(persona.getDNI(), persona.getNombres(), persona.getFec_nac(), persona.getEmail());
+        this.fec_registro = new Fecha(); // Fecha actual
+        this.alumno_vigente = true; // Valor inicial por defecto
+        this.telefono = "No especificado";
     }
 
-    public void setCod_alum(int cod_alum) {
-        this.cod_alum = cod_alum;
-    }
+    // Método para calcular la antigüedad del alumno en años
+    public int getAntiguedad() {
+        LocalDateTime fechaRegistro = LocalDateTime.of(fec_registro.getAño_int(), fec_registro.getMes_int(), fec_registro.getDia_int(), 0, 0);
+        LocalDateTime fechaActual = LocalDateTime.now();
 
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public int getAño_ingreso() {
-        return año_ingreso;
-    }
-
-    public void setAño_ingreso(int año_ingreso) {
-        this.año_ingreso = año_ingreso;
+        return (int) ChronoUnit.YEARS.between(fechaRegistro, fechaActual);
     }
 
     @Override
     public String toString() {
-        return "Alumno{" + "cod_alum=" + cod_alum + ", nombres=" + nombres + ", a\u00f1o_ingreso=" + año_ingreso + '}';
+        return "Alumno{" +
+               "DNI='" + getDNI() + '\'' +
+               ", nombres='" + getNombres() + '\'' +
+               ", fec_nac=" + (getFec_nac() != null ? getFec_nac().toString() : "No definida") +
+               ", email='" + (getEmail() != null ? getEmail() : "No definido") + '\'' +
+               ", fec_registro=" + (fec_registro != null ? fec_registro.toString() : "No definida") +
+               ", alumno_vigente=" + alumno_vigente +
+               ", telefono='" + telefono + '\'' +
+               '}';
     }
 
-    
-    
-    
+    // Getters y setters opcionales
+    public Fecha getFec_registro() {
+        return fec_registro;
+    }
+
+    public void setFec_registro(Fecha fec_registro) {
+        this.fec_registro = fec_registro;
+    }
+
+    public boolean isAlumno_vigente() {
+        return alumno_vigente;
+    }
+
+    public void setAlumno_vigente(boolean alumno_vigente) {
+        this.alumno_vigente = alumno_vigente;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 }
